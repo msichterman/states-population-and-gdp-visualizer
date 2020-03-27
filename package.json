@@ -1,0 +1,22 @@
+{
+  "name": "csce411-assignment3-d3",
+  "version": "1.0.0",
+  "description": "Build Web-based Interactive Visualization Data Models using D3",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/msichterman/CSCE411-Assignment3-D3.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/msichterman/CSCE411-Assignment3-D3/issues"
+  },
+  "homepage": "https://github.com/msichterman/CSCE411-Assignment3-D3#readme",
+  "dependencies": {
+    "http-server": "^0.12.1"
+  }
+}
