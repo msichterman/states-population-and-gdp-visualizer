@@ -1,5 +1,12 @@
+body {
+  margin: 0;
+}
 .heading {
   text-align: center;
+}
+.subheading {
+  margin-left: 20px;
+  text-decoration: underline;
 }
 .chart rect {
   fill: steelblue;
@@ -8,6 +15,10 @@
   fill: white;
   font: 10px sans-serif;
   text-anchor: end;
+}
+
+.chart {
+  margin: 0 auto;
 }
 
 ul {
@@ -26,14 +37,11 @@ li a {
   display: block;
   color: white;
   text-align: center;
+  font-weight: bold;
   padding: 14px 16px;
   text-decoration: none;
 }
 
-li a:hover:not(.active) {
-  background-color: #111;
-}
-
-.active {
+li a:hover {
   background-color: #4caf50;
 }

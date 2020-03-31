@@ -1,0 +1,25 @@
+body {
+  margin-top: 8px;
+  margin-left: 0;
+}
+
+#return-home {
+  color: white;
+  background-color: #333;
+  text-decoration: none;
+  font-weight: bold;
+  text-align: center;
+  padding: 14px 16px;
+}
+
+#return-home:hover {
+  background-color: #4caf50;
+}
+
+.heading {
+  text-align: center;
+}
+.subheading {
+  margin-left: 20px;
+  text-decoration: underline;
+}
