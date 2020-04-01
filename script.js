@@ -4,9 +4,7 @@ var barHeight = 20;
 
 var x = d3.scale.linear().range([0, width]);
 
-var chart = d3
-  .select(".chart")
-  .attr("width", width + margin.left + margin.right);
+var chart = d3.select(".chart");
 
 var allgroup = chart
   .append("g")
