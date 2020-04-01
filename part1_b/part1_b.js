@@ -83,11 +83,6 @@ d3.tsv("../state_population_gdp.tsv")
       .attr("class", "tooltip")
       .style("opacity", 0);
 
-    // Compute surrounding values for width and height
-
-    // var leftWidth = d3.select(".chart-1a").getBoundingClientRect().left;
-    // console.log(leftWidth);
-
     // Draw the rectanges for each data point
     chart
       .selectAll()
@@ -100,6 +95,7 @@ d3.tsv("../state_population_gdp.tsv")
       .attr("width", xScale.bandwidth())
       .attr("fill", "steelblue")
       .on("mouseover", function(d, i) {
+        // Calculate the relative x and y of the hovered bar to calculate the tooltip location
         var tipx =
           d3
             .select(this)
