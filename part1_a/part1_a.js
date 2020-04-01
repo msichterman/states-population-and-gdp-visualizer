@@ -17,11 +17,13 @@ const xScale = d3
   .range([0, width])
   .padding(0.2);
 
-var tooltip = chart.append("text").style("visibility", "hidden");
-
 // Read the tsv file
-d3.tsv("state_population_gdp.tsv")
+d3.tsv("../state_population_gdp.tsv")
   .then(data => {
+    data.forEach(d => {
+      d.population = +d.population;
+    });
+
     // Set the x and y scales based on the data
     yScale
       .domain([
@@ -47,6 +49,45 @@ d3.tsv("state_population_gdp.tsv")
     // Set the y-scale
     chart.append("g").call(d3.axisLeft(yScale));
 
+    //Create Title
+    chart
+      .append("text")
+      .attr("x", width / 2)
+      .attr("y", 0 - margin / 2)
+      .attr("text-anchor", "middle")
+      .style("font-size", "24px")
+      .style("text-decoration", "underline")
+      .text("Population Numbers of the States");
+    // X axis label
+    chart
+      .append("text")
+      .attr("x", width / 2)
+      .attr("y", height + margin)
+      .style("text-anchor", "middle")
+      .text("State");
+
+    // Y axis label
+    chart
+      .append("text")
+      .attr("transform", "rotate(-90)")
+      .attr("y", 0 - margin)
+      .attr("x", 0 - height / 2)
+      .attr("dy", "1em")
+      .style("text-anchor", "middle")
+      .text("Population");
+
+    // Initialize the tooltip
+    var div = d3
+      .select("body")
+      .append("div")
+      .attr("class", "tooltip")
+      .style("opacity", 0);
+
+    // Compute surrounding values for width and height
+
+    // var leftWidth = d3.select(".chart-1a").getBoundingClientRect().left;
+    // console.log(leftWidth);
+
     // Draw the rectanges for each data point
     chart
       .selectAll()
@@ -57,21 +98,35 @@ d3.tsv("state_population_gdp.tsv")
       .attr("y", s => yScale(s.population))
       .attr("height", s => height - yScale(s.population))
       .attr("width", xScale.bandwidth())
+      .attr("fill", "steelblue")
       .on("mouseover", function(d, i) {
-        // console.log(i);
-        // console.log(d3.select(this).attr("width"));
-        var tipx = d3.select(this).attr("x") - 20;
-        var tipy = height - d3.select(this).attr("height") - 5;
-        tooltip.attr("x", tipx);
-        tooltip.attr("y", tipy);
-        // tooltip.attr("dx", 35);
-        // tooltip.attr("dy", -10);
-        tooltip.style("visibility", "visible");
-        tooltip.style("fill", "black");
-        tooltip.text(d.population);
+        var tipx =
+          d3
+            .select(this)
+            .node()
+            .getBoundingClientRect().left - 25;
+        var tipy =
+          d3
+            .select(this)
+            .node()
+            .getBoundingClientRect().top - 23;
+        div
+          .transition()
+          .duration(200)
+          .style("opacity", 1);
+        div
+          .html(d.population)
+          .style("left", tipx + "px")
+          .style("top", tipy + "px");
+
+        d3.select(this).attr("fill", "orange");
       })
       .on("mouseout", function() {
-        tooltip.style("visibility", "hidden");
+        div
+          .transition()
+          .duration(500)
+          .style("opacity", 0);
+        d3.select(this).attr("fill", "steelblue");
       });
   })
   .catch(err => console.log(err));
