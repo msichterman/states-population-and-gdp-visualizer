@@ -5,4 +5,4 @@ In order to get up and running on a local development server do the following:
 * Run the following command in the root folder of this repository:
 ```http-server```
 
-The app will then be live at [here](http://127.0.0.1:8080)(or elsewhere if port 8080 is already in use)!
+The app will then be live [here](http://127.0.0.1:8080) (or elsewhere if port 8080 is already in use)!
