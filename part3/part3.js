@@ -1,53 +1,54 @@
-/* [THE GRAPH DATA] */
-// Let's say that you AJAX load these data from the server
-var vertical = [
-  ["First", 40],
-  ["a", 40],
-  ["b", 45],
-  ["c", 48],
-  ["d", 49],
-  ["e", 55],
-  ["Second", 65],
-  ["Third", 98]
-];
-
+// Fetch data from the local tsv file
 const rows = fetch("../state_population_gdp.tsv", { mode: "no-cors" })
   .then(response => response.text())
   .then(data => data.split("\n").map(row => row.split("\t")))
   .then(data => data.slice(1, 52))
   .catch(error => console.error(error));
 
-console.log(rows);
+// Draw the bars on page load
+container = document.getElementById("bar-vertical");
 
-/* [DRAW THE BARS ON PAGE LOAD] */
-window.addEventListener("load", function() {
-  // DRAW THE VERTICAL BARS
-  container = document.getElementById("bar-vertical");
-  rows.then(result => {
-    // // Find the max population in order to calculate bar height
-    // const maxPolulation = Math.max(...result.map(row => parseInt(row[1])));
+var tooltip = document.createElement("div");
+tooltip.className = "tooltip";
+tooltip.style.opacity = "0";
 
-    for (var row of result) {
-      var bar = document.createElement("div");
-      bar.classList.add("vcell");
+rows.then(result => {
+  for (var row of result) {
+    var bar = document.createElement("div");
+    bar.classList.add("vcell");
 
-      var inbar = document.createElement("div");
-      inbar.classList.add("vbar");
-      inbar.style.background = "steelblue";
-      inbar.style.height = (row[1] / 40000000) * 100 + "%";
+    var inbar = document.createElement("div");
+    inbar.classList.add("vbar");
+    inbar.style.background = "steelblue";
+    inbar.style.height = (row[1] / 40000000) * 100 + "%";
 
-      // Add event litner to change orange on mouseover, or back to blue on mouse out
-      inbar.addEventListener("mouseover", function(event) {
-        // highlight the mouseover target
-        event.target.style.background = "orange";
-      });
-      inbar.addEventListener("mouseout", function(event) {
-        // highlight the mouseover target
-        event.target.style.background = "steelblue";
-      });
+    // Add event litner to change orange on mouseover, or back to blue on mouse out
+    inbar.addEventListener("mouseover", function(event) {
+      // Highlight the mouseover target
+      event.target.style.background = "orange";
 
-      bar.appendChild(inbar);
-      container.appendChild(bar);
-    }
-  });
+      // Find which bar is being moused over, and get the population for that index from the row list
+      let current = event.target.parentNode;
+      let childIndex = [...current.parentNode.children].indexOf(current);
+      tooltip.innerHTML = result[childIndex][1];
+
+      // Calculate the relative x and y of the hovered bar to calculate the tooltip location
+      var tipx = event.target.getBoundingClientRect().left - 25;
+      var tipy = event.target.getBoundingClientRect().top - 23;
+      tooltip.style.left = tipx + "px";
+      tooltip.style.top = tipy + "px";
+      tooltip.style.opacity = "1";
+      tooltip.style.transition = "opacity .2s";
+    });
+    inbar.addEventListener("mouseout", function(event) {
+      // Un-highlight the mouseover target
+      event.target.style.background = "steelblue";
+      tooltip.style.opacity = "0";
+      tooltip.style.transition = "opacity .5s";
+    });
+
+    bar.appendChild(inbar);
+    container.appendChild(bar);
+    document.body.appendChild(tooltip);
+  }
 });
