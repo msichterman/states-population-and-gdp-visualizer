@@ -24,8 +24,9 @@ window.addEventListener("load", function() {
   // DRAW THE VERTICAL BARS
   container = document.getElementById("bar-vertical");
   rows.then(result => {
-    // Find the max population in order to calculate bar height
-    const maxPolulation = Math.max(...result.map(row => parseInt(row[1])));
+    // // Find the max population in order to calculate bar height
+    // const maxPolulation = Math.max(...result.map(row => parseInt(row[1])));
+
     for (var row of result) {
       var bar = document.createElement("div");
       bar.classList.add("vcell");
@@ -33,7 +34,7 @@ window.addEventListener("load", function() {
       var inbar = document.createElement("div");
       inbar.classList.add("vbar");
       inbar.style.background = "steelblue";
-      inbar.style.height = (row[1] / maxPolulation) * 100 + "%";
+      inbar.style.height = (row[1] / 40000000) * 100 + "%";
 
       // Add event litner to change orange on mouseover, or back to blue on mouse out
       inbar.addEventListener("mouseover", function(event) {
