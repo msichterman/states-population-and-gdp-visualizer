@@ -11,47 +11,42 @@ var vertical = [
   ["Third", 98]
 ];
 
-// The data from the tsv
-var data = [];
-// parse_tsv(tsvstring, function (row) { do something with row })
-function parse_tsv(s) {
-  var ix_end = 0;
-  for (var ix = 0; ix < s.length; ix = ix_end + 1) {
-    ix_end = s.indexOf("\n", ix);
-    if (ix_end == -1) {
-      ix_end = s.length;
-    }
-    var row = s.substring(ix, ix_end - 1).split("\t");
-    data.push(row);
-  }
-}
+const rows = fetch("../state_population_gdp.tsv", { mode: "no-cors" })
+  .then(response => response.text())
+  .then(data => data.split("\n").map(row => row.split("\t")))
+  .then(data => data.slice(1, 52))
+  .catch(error => console.error(error));
 
-console.log(data);
+console.log(rows);
 
 /* [DRAW THE BARS ON PAGE LOAD] */
 window.addEventListener("load", function() {
   // DRAW THE VERTICAL BARS
   container = document.getElementById("bar-vertical");
-  for (var vert of vertical) {
-    var bar = document.createElement("div");
-    bar.classList.add("vcell");
+  rows.then(result => {
+    // Find the max population in order to calculate bar height
+    const maxPolulation = Math.max(...result.map(row => parseInt(row[1])));
+    for (var row of result) {
+      var bar = document.createElement("div");
+      bar.classList.add("vcell");
 
-    var inbar = document.createElement("div");
-    inbar.classList.add("vbar");
-    inbar.style.background = "steelblue";
-    inbar.style.height = vert[1] + "%";
+      var inbar = document.createElement("div");
+      inbar.classList.add("vbar");
+      inbar.style.background = "steelblue";
+      inbar.style.height = (row[1] / maxPolulation) * 100 + "%";
 
-    // Add event litner to change orange on mouseover, or back to blue on mouse out
-    inbar.addEventListener("mouseover", function(event) {
-      // highlight the mouseover target
-      event.target.style.background = "orange";
-    });
-    inbar.addEventListener("mouseout", function(event) {
-      // highlight the mouseover target
-      event.target.style.background = "steelblue";
-    });
+      // Add event litner to change orange on mouseover, or back to blue on mouse out
+      inbar.addEventListener("mouseover", function(event) {
+        // highlight the mouseover target
+        event.target.style.background = "orange";
+      });
+      inbar.addEventListener("mouseout", function(event) {
+        // highlight the mouseover target
+        event.target.style.background = "steelblue";
+      });
 
-    bar.appendChild(inbar);
-    container.appendChild(bar);
-  }
+      bar.appendChild(inbar);
+      container.appendChild(bar);
+    }
+  });
 });
