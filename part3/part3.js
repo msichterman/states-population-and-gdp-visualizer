@@ -12,6 +12,8 @@ var tooltip = document.createElement("div");
 tooltip.className = "tooltip";
 tooltip.style.opacity = "0";
 
+var populationIndex = 1;
+
 rows.then(result => {
   for (var row of result) {
     var bar = document.createElement("div");
@@ -30,7 +32,7 @@ rows.then(result => {
       // Find which bar is being moused over, and get the population for that index from the row list
       let current = event.target.parentNode;
       let childIndex = [...current.parentNode.children].indexOf(current);
-      tooltip.innerHTML = result[childIndex][1];
+      tooltip.innerHTML = result[childIndex][populationIndex];
 
       // Calculate the relative x and y of the hovered bar to calculate the tooltip location
       var tipx =
