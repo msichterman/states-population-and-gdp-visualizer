@@ -33,8 +33,10 @@ rows.then(result => {
       tooltip.innerHTML = result[childIndex][1];
 
       // Calculate the relative x and y of the hovered bar to calculate the tooltip location
-      var tipx = event.target.getBoundingClientRect().left - 25;
-      var tipy = event.target.getBoundingClientRect().top - 23;
+      var tipx =
+        event.target.getBoundingClientRect().left + window.pageXOffset - 25;
+      var tipy =
+        event.target.getBoundingClientRect().top + window.pageYOffset - 23;
       tooltip.style.left = tipx + "px";
       tooltip.style.top = tipy + "px";
       tooltip.style.opacity = "1";

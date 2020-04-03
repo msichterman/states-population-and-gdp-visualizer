@@ -106,19 +106,24 @@ d3.tsv("../state_population_gdp.tsv")
           d3
             .select(this)
             .node()
-            .getBoundingClientRect().left - 35;
+            .getBoundingClientRect().left +
+          window.pageXOffset -
+          35;
         var tipy =
           d3
             .select(this)
             .node()
-            .getBoundingClientRect().top - 23;
+            .getBoundingClientRect().top +
+          window.pageYOffset -
+          23;
         div
           .transition()
           .duration(200)
           .style("opacity", 1);
         div
           .html(
-            `${d.state}: ${Math.round((d.gdp * 1000.0) / d.population) / 1000}`
+            `<nobr>${d.state}: ${Math.round((d.gdp * 1000.0) / d.population) /
+              1000}</nobr>`
           )
           .style("left", tipx + "px")
           .style("top", tipy + "px");

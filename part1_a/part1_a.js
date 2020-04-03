@@ -101,12 +101,16 @@ d3.tsv("../state_population_gdp.tsv")
           d3
             .select(this)
             .node()
-            .getBoundingClientRect().left - 25;
+            .getBoundingClientRect().left +
+          window.pageXOffset -
+          25;
         var tipy =
           d3
             .select(this)
             .node()
-            .getBoundingClientRect().top - 23;
+            .getBoundingClientRect().top +
+          window.pageYOffset -
+          23;
         div
           .transition()
           .duration(200)
