@@ -4,7 +4,7 @@
 See this repository in action [here](https://msichterman.github.io/CSCE411-Assignment3-D3/)!
 
 ## Motivation
-This site was created to satisfy the requirements of an assignment in my `CSCE 411 - Data Modeling for Systems Development` class at the University of Nebraska-Lincoln. The assignment was intended to help build the following skills:
+This site was created to satisfy the requirements of an assignment in my `CSCE 411: Data Modeling for Systems Development` class at the University of Nebraska-Lincoln. The assignment was intended to help build the following skills:
 
 * Building web-based interactive visualization data models using D3
 * Understand the efficiency of using D3 by comparing it with vanilla JavaScript
