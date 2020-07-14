@@ -1,4 +1,7 @@
-# Build Web-based Interactive Visualization Data Models Using D3.js vs. Vanilla JavaScript
+[![MSICH - Personal Site](https://img.shields.io/badge/MSICH-Personal%20Site-0892d0)](https://msich.netlify.app/)&emsp;
+[![Twitter Follow](https://img.shields.io/twitter/follow/mattsichterman?style=social)](https://twitter.com/mattsichterman)&emsp;
+[![Follow on GitHub](https://img.shields.io/github/followers/msichterman?label=Follow%20on%20Github&style=social)](https://github.com/msichterman)&emsp;
+# 50 States Population and GDP Visualizer Using D3.js vs. Vanilla JavaScript
 ***Disclaimer: This repository is public to showcase skills developed from this assignment. I am in no way reponsible for any academic integrity issues should any code be re-used or copied from any part of this assignment.**
 
 See this repository in action [here](https://msichterman.github.io/CSCE411-Assignment3-D3/)!
