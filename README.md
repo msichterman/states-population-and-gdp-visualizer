@@ -4,7 +4,7 @@
 # 50 States Population and GDP Visualizer Using D3.js vs. Vanilla JavaScript
 ***Disclaimer: This repository is public to showcase skills developed from this assignment. I am in no way reponsible for any academic integrity issues should any code be re-used or copied from any part of this assignment.**
 
-See this repository in action [here](https://msichterman.github.io/CSCE411-Assignment3-D3/)!
+See this repository in action [here](https://msichterman.github.io/states-population-and-gdp-visualizer/)!
 
 ## Motivation
 This site was created to satisfy the requirements of an assignment in my `CSCE 411: Data Modeling for Systems Development` class at the University of Nebraska-Lincoln. The assignment was intended to help build the following skills:
